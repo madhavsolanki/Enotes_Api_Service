@@ -6,6 +6,8 @@ import com.notes.entity.Category;
 import com.notes.exception.ResourceNotFoundException;
 import com.notes.repository.CategoryRepository;
 import com.notes.service.CategoryService;
+import com.notes.utils.Validation;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,9 +25,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private ModelMapper mapper;
+    
+    @Autowired
+    private Validation validation;
 
     @Override
     public Boolean saveCategory(CategoryDto categoryDto) {
+
+        // VAlidation Checking
+        validation.categoryValidation(categoryDto);
 
         // Using Model Mapper
         Category category =  mapper.map(categoryDto, Category.class);

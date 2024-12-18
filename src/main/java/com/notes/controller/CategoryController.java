@@ -2,8 +2,9 @@ package com.notes.controller;
 
 import com.notes.dto.CategoryDto;
 import com.notes.dto.CategoryResponse;
-import com.notes.exception.ResourceNotFoundException;
 import com.notes.service.CategoryService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping("/save-category")
-    public ResponseEntity<?> saveCategory(@RequestBody CategoryDto categoryDto){
+    public ResponseEntity<?> saveCategory( @RequestBody CategoryDto categoryDto){
         Boolean saveCategory = categoryService.saveCategory(categoryDto);
 
         if (saveCategory) {
