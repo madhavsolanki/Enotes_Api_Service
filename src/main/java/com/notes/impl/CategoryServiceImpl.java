@@ -3,6 +3,7 @@ package com.notes.impl;
 import com.notes.dto.CategoryDto;
 import com.notes.dto.CategoryResponse;
 import com.notes.entity.Category;
+import com.notes.exception.ResourceNotFoundException;
 import com.notes.repository.CategoryRepository;
 import com.notes.service.CategoryService;
 import org.modelmapper.ModelMapper;
@@ -79,11 +80,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto getCategoryById(Integer id) {
-        Optional<Category> findByCategory = categoryRepo.findByIdAndIsDeletedFalse(id);
+    public CategoryDto getCategoryById(Integer id) throws Exception {
+        
+        Category category = categoryRepo.findByIdAndIsDeletedFalse(id)
+        .orElseThrow(()-> new ResourceNotFoundException("Category Not Found with id: "+id));
 
-        if (findByCategory.isPresent()) {
-            Category category = findByCategory.get();
+        if (!ObjectUtils.isEmpty(category)) {
             return mapper.map(category, CategoryDto.class);
         }
         return null;

@@ -2,6 +2,7 @@ package com.notes.controller;
 
 import com.notes.dto.CategoryDto;
 import com.notes.dto.CategoryResponse;
+import com.notes.exception.ResourceNotFoundException;
 import com.notes.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +52,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getCategoryDetailsById(@PathVariable Integer id){
+    public ResponseEntity<?> getCategoryDetailsById(@PathVariable Integer id) throws Exception{
 
         CategoryDto categoryDto = categoryService.getCategoryById(id);
 
@@ -59,6 +60,8 @@ public class CategoryController {
             return new ResponseEntity<>("Category Not Found with id: "+id, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(categoryDto, HttpStatus.OK);
+            
+        
 
     }
 
