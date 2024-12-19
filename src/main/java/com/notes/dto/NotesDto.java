@@ -33,4 +33,11 @@ public class NotesDto {
 
   private Date updatedOn;
 
+
+  public static class CategoryDto {
+    private Integer id;
+    private String name;
+    
+  }
+
 }
