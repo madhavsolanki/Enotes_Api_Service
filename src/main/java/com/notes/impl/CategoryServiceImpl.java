@@ -3,6 +3,7 @@ package com.notes.impl;
 import com.notes.dto.CategoryDto;
 import com.notes.dto.CategoryResponse;
 import com.notes.entity.Category;
+import com.notes.exception.ExistDataException;
 import com.notes.exception.ResourceNotFoundException;
 import com.notes.repository.CategoryRepository;
 import com.notes.service.CategoryService;
@@ -33,6 +34,15 @@ public class CategoryServiceImpl implements CategoryService {
 
         // VAlidation Checking
         validation.categoryValidation(categoryDto);
+
+        
+        // Checking Category Already Exist or Not
+        Boolean exist = categoryRepo.existsByName(categoryDto.getName().trim());
+        if (exist) {
+            // Throw Error
+            throw new ExistDataException("Category Already Exist");
+        }
+
 
         // Using Model Mapper
         Category category =  mapper.map(categoryDto, Category.class);
