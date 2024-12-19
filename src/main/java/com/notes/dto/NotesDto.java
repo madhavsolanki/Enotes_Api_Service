@@ -1,6 +1,9 @@
 package com.notes.dto;
 
 import java.util.Date;
+
+import com.notes.entity.Category;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,16 +13,15 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryDto {
+public class NotesDto {
 
   private Integer id;
 
-  
-  private String name;
+  private String title;
 
- 
   private String description;
 
+  private Category category;
 
   private Boolean isActive;
 
@@ -30,5 +32,5 @@ public class CategoryDto {
   private Integer updatedBy;
 
   private Date updatedOn;
-  
+
 }
